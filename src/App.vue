@@ -1,18 +1,19 @@
 <template>
-  <main class="columns is-gapless is-multiline" :class="{'modo-escuro': modoEscuroAtivo}">
-    
+  <main class="columns is-gapless is-multiline" :class="{ 'modo-escuro': modoEscuroAtivo }">
+
     <div class="column is-one-quarter">
-      <BarraLateral @aCorAlterada="trocarCor"/>      
+      <BarraLateral @aCorAlterada="trocarCor" />
     </div>
     <div class="column is-three-quarter conteudo">
       <FormularioAtividade @aoSalvarAtividade="salvarAtividade" />
-      <div class="lista">        
-        <AtividadesFeitas v-for="(atividade, chave) in atividades" :key="chave" :atividade="atividade"/>
-        </div>
-       <BoxAtiv v-if="listaVazia">
-        Você precisa estudar mais! 
+      <div class="lista">
+        <AtividadesFeitas v-for="(atividade, chave) in atividades" :key="chave" :atividade="atividade"
+          @excluir="excluirAtivado(atividade)" />
+      </div>
+      <BoxAtiv v-if="listaVazia">
+        Você precisa estudar mais!
       </BoxAtiv>
-      
+
     </div>
   </main>
 </template>
@@ -34,8 +35,8 @@ export default defineComponent({
     FormularioAtividade,
     AtividadesFeitas,
     BoxAtiv
-    
-},
+
+  },
   data() {
     return {
       atividades: [] as InteAtividade[],
@@ -51,9 +52,25 @@ export default defineComponent({
   methods: {
     salvarAtividade(atividade: InteAtividade) {
       this.atividades.push(atividade)
+      const parsed = JSON.stringify(this.atividades);
+      localStorage.setItem("atividade", parsed);
     },
-    trocarCor(modoEscuroAtivo : boolean){
+    trocarCor(modoEscuroAtivo: boolean) {
       this.modoEscuroAtivo = modoEscuroAtivo
+    },
+    excluirAtivado(atividade: InteAtividade) {
+       this.atividades = this.atividades.filter(res =>
+        atividade !== res
+      )
+    }
+  },
+  mounted () {
+     if (localStorage.getItem("atividade")) {
+      try {
+        this.atividades = JSON.parse(localStorage.getItem("atividade")|| '{ }');
+      } catch (e) {
+        localStorage.removeItem("atividade");
+      }
     }
   }
 });
@@ -62,18 +79,20 @@ export default defineComponent({
 <style>
 .lista {
   padding: 1.25rem;
-  
+
 }
 
-main{
- --bg-primario: #fff;
- --texto-primerio: #000;
+main {
+  --bg-primario: #fff;
+  --texto-primerio: #000;
 }
+
 main.modo-escuro {
   --bg-primario: #2b2d42;
   --texto-primario: #ddd;
-  }
+}
+
 .conteudo {
-  background-color: var(--bg-primario) ;
+  background-color: var(--bg-primario);
 }
 </style>

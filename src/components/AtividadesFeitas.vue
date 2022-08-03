@@ -7,6 +7,11 @@
             <div class="column">
                 <ContadorTempo :tempoSegundos="atividade.duracaoSegundos"/>
             </div>
+            <div>
+                <button class="btExcluir" @click="excluir()">
+                    Excluir
+                </button>
+            </div>
         </div>
     </BoxAtiv>
 </template>
@@ -28,8 +33,18 @@ export default defineComponent({
             type: Object as PropType<InteAtividade>,
             required: true
         }
+    },
+    methods: {
+        excluir(){
+            this.$emit("excluir");
+        }
     }
-
 });
 </script>
+<style scoped>
+ .btExcluir {
+   background: brown;
+   color: white;
+ }
+</style>
 

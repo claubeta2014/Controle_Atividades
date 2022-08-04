@@ -6,9 +6,8 @@
             </button>
         </div>
         <div>
-            <img class="fotos" src="../assets/logo.png">
-            <img class="fotos" src="../assets/logo4.png">
-            <img class="fotos" src="../assets/logo5.jpg">
+           <img class="fotos" src="../assets/logo4.png">
+   
         </div>
     </header>
 
@@ -21,7 +20,7 @@ export default defineComponent({
     emits: ['aCorAlterada'],
     data() {
         return {
-            modoEscuroAtivo: true
+            modoEscuroAtivo: false
         }
     },
     computed: {
@@ -46,7 +45,7 @@ export default defineComponent({
 header {
     padding: 0.8rem;
     background: #310d66;
-    width: 100%;
+    width: auto;
     height: auto;
     text-align: center;
 
@@ -57,6 +56,7 @@ header {
     header {
         padding: auto;
         height: auto;
+       
 
     }
 }
@@ -68,6 +68,6 @@ header {
 }
 
 .fotos {
-    border-radius: 50px;
+    border-radius: 200px;
 }
 </style>

@@ -11,7 +11,7 @@
           @excluir="excluirAtivado(atividade)" />
       </div>
       <BoxAtiv v-if="listaVazia">
-        Você precisa estudar mais!
+        Vamos começar?
       </BoxAtiv>
 
     </div>
@@ -40,7 +40,7 @@ export default defineComponent({
   data() {
     return {
       atividades: [] as InteAtividade[],
-      modoEscuroAtivo: false
+      modoEscuroAtivo: true
     }
   },
 
@@ -88,11 +88,12 @@ main {
 }
 
 main.modo-escuro {
-  --bg-primario: #2b2d42;
+  --bg-primario: #310d66;
   --texto-primario: #ddd;
 }
 
 .conteudo {
   background-color: var(--bg-primario);
+
 }
 </style>

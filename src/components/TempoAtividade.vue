@@ -42,7 +42,7 @@ export default defineComponent({
             this.contadorTempo = setInterval(() => {
                 this.tempoSegundos += 1             
             }, 1000 )
-            const minutos = 15 * 60 * 1000           
+            const minutos = 60 * 60 * 1000           
             this.intervalo = setInterval(() => {
                 alert("Hora de fazer um intervalo!");
             }, minutos)

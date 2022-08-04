@@ -28,7 +28,7 @@ export default defineComponent({
             if (this.modoEscuroAtivo) {
                 return 'Alterar para modo Escuro'
             }
-            return 'Altera para modo Claro'
+            return 'Alterar para modo Claro'
         }
     },
     methods: {
@@ -62,7 +62,7 @@ header {
 }
 
 .button {
-    background: brown;
+    background: #310d66;
     color: white;
     border-radius: 50px;
 }

@@ -5,13 +5,13 @@
             <span class="icon">
                 <i class="fas fa-play"></i>
             </span>
-            <span> Play </span>
+            <span> iniciar </span>
         </button>
         <button class="button" @click=" parar " :disabled="!cronometroRodando">
             <span class="icon">
                 <i class="fas fa-stop"></i>
             </span>
-            <span> Stop </span>
+            <span> Parar </span>
         </button>
     </div>
 </template>
@@ -59,5 +59,8 @@ export default defineComponent({
 });
 </script>
 <style scoped>
+.button{
+    border-radius: 50px;
+}
 
 </style>

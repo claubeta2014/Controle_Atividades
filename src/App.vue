@@ -67,7 +67,7 @@ export default defineComponent({
   mounted () {
      if (localStorage.getItem("atividade")) {
       try {
-        this.atividades = JSON.parse(localStorage.getItem("atividade")|| '{ }');
+        this.atividades = JSON.parse(localStorage.getItem("atividade")|| 'null');
       } catch (e) {
         localStorage.removeItem("atividade");
       }

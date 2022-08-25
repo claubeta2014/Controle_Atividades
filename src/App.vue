@@ -3,28 +3,18 @@
 
     <div class="column is-one-quarter">
       <BarraLateral @aCorAlterada="trocarCor" />
-    </div>
+    </div>    
     <div class="column is-three-quarter conteudo">
-      <FormularioAtividade @aoSalvarAtividade="salvarAtividade" />
-      <div class="lista">
-        <AtividadesFeitas v-for="(atividade, chave) in atividades" :key="chave" :atividade="atividade"
-          @excluir="excluirAtivado(atividade)" />
-      </div>
-      <BoxAtiv v-if="listaVazia">
-        Vamos começar?
-      </BoxAtiv>
-
-    </div>
+      <NotifAtiv/>
+      <router-view></router-view>     
+    </div>    
   </main>
 </template>
-
 <script lang="ts">
 import { defineComponent } from 'vue';
 import BarraLateral from './components/BarraLateral.vue';
-import FormularioAtividade from './components/FormularioAtividade.vue';
-import AtividadesFeitas from './components/AtividadesFeitas.vue';
-import InteAtividade from './interface/InteAtividade'
-import BoxAtiv from './components/BoxAtiv.vue';
+import NotifAtiv from './components/NotifAtiv.vue';
+
 
 
 
@@ -32,45 +22,17 @@ export default defineComponent({
   name: "App",
   components: {
     BarraLateral,
-    FormularioAtividade,
-    AtividadesFeitas,
-    BoxAtiv
-
-  },
+    NotifAtiv
+},
   data() {
     return {
-      atividades: [] as InteAtividade[],
-      modoEscuroAtivo: true
+       modoEscuroAtivo: true
     }
   },
 
-  computed: {
-    listaVazia(): boolean {
-      return this.atividades.length === 0
-    }
-  },
   methods: {
-    salvarAtividade(atividade: InteAtividade) {
-      this.atividades.push(atividade)
-      const parsed = JSON.stringify(this.atividades);
-      localStorage.setItem("atividade", parsed);
-    },
     trocarCor(modoEscuroAtivo: boolean) {
       this.modoEscuroAtivo = modoEscuroAtivo
-    },
-    excluirAtivado(atividade: InteAtividade) {
-       this.atividades = this.atividades.filter(res =>
-        atividade !== res
-      )
-    }
-  },
-  mounted () {
-     if (localStorage.getItem("atividade")) {
-      try {
-        this.atividades = JSON.parse(localStorage.getItem("atividade")|| 'null');
-      } catch (e) {
-        localStorage.removeItem("atividade");
-      }
     }
   }
 });
@@ -94,6 +56,5 @@ main.modo-escuro {
 
 .conteudo {
   background-color: var(--bg-primario);
-
 }
 </style>

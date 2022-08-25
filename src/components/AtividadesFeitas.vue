@@ -1,16 +1,17 @@
 <template>
     <BoxAtiv>
         <div class="columns">
-            <div class="column is-7" >
+            <div class="column is-5" >
                {{atividade.descricao || 'Atividade sem Informação'}}
             </div>
+            <div class="column is-3"> {{atividade.projeto?.nome || ''}} </div>
             <div class="column">
                 <ContadorTempo :tempoSegundos="atividade.duracaoSegundos"/>
             </div>
             <div>
-                <button class="btExcluir" @click="excluir()">
-                    Excluir
-                </button>
+                <button class="button ml-4 is-danger is-rounded" @click="excluir()">
+                    Excluir                    
+                </button> 
             </div>
         </div>
     </BoxAtiv>
@@ -38,11 +39,11 @@ export default defineComponent({
         excluir(){
             this.$emit("excluir");
         }
-    }
+    },
 });
 </script>
 <style scoped>
- .btExcluir {
+ .button {
    background: brown;
    color: white;
  }
